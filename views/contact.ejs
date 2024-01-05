@@ -1,0 +1,84 @@
+<div class="alert-placer"></div>
+
+<% if (typeof successMessage !== 'undefined') { %>
+
+  <script>
+    const successAlert = document.createElement('div');
+    const msg = () => {
+      return `<div class="msg fixed top-20 w-1/2 left-1/4 flex mb-5 items-center justify-center bg-teal-500 text-white text-sm font-bold px-4 py-3" role="alert">
+        <p><%= successMessage %></p>
+      </div>`
+    };
+    successAlert.innerHTML = msg();
+    document.querySelector('.alert-placer').append(successAlert);
+    setTimeout(()=>{
+      document.querySelector('.alert-placer').removeChild(successAlert);
+    }, 5000)
+  </script>
+
+  <% } %>
+
+  
+
+<% if (typeof successDelete !== 'undefined') { %>
+
+  <script>
+    const successAlert = document.createElement('div');
+    const delMsg = () => {
+      return `<div class="delMsg fixed top-20 w-1/2 left-1/4 flex mb-5 items-center justify-center bg-teal-500 text-white text-sm font-bold px-4 py-3" role="alert">
+        <p><%= successDelete %></p>
+      </div>`
+    };
+    successAlert.innerHTML = delMsg();
+    document.querySelector('.alert-placer').append(successAlert);
+    setTimeout(()=>{
+      document.querySelector('.alert-placer').removeChild(successAlert);
+    }, 5000)
+  </script>
+
+  <% } %>
+  
+<div class="container lg:max-w-3xl mx-auto border-2 rounded-xl p-5">
+  <div class="flex justify-between items-end mb-4">
+    <h1 class="text-2xl font-bold mb-2">Daftar Kontak</h1>
+    <div class="">
+      <a href="/contact/add" class="inline-block py-1.5 px-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-sm rounded-lg">Buat Kontak Baru</a>
+    </div>
+  </div>
+  <div class="">
+    <table class="table-auto w-full text-sm">
+      <% if (contacts.length === 0) { %>
+        <div class=" text-slate-500">
+         Data Kontak masih kosong
+        </div>
+       <% } else { %>
+      <thead>
+        <tr class="border-b-4">
+          <th class="py-1 px-2 text-start">No</th>
+          <th class="py-1 px-2 text-start">Name</th>
+          <th class="py-1 px-2 text-start">No Whatsapp</th>
+          <th class="py-1 px-2 text-start">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% contacts.forEach((contact, index) => { %>
+
+        <tr class="border-b-2">
+          <td class="py-1 px-2"><%= index + 1 %></td>
+          <td class="py-1 px-2"><%= contact.nama %></td>
+          <td class="py-1 px-2"><%= contact.noHp %></td>
+          <td class="py-1 px-2">
+            <a
+              href="/contact/<%- contact.nama %>"
+              class="py-1.5 px-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-xs rounded-lg"
+              >Detail</a
+            >
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+
+      <% } %>
+    </table>
+  </div>
+</div>
